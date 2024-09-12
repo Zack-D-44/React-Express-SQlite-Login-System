@@ -1,0 +1,69 @@
+/* Centre class on horizontal and vertical */
+
+.formContainer {
+    padding: 12px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    border-radius: 10px;
+}
+
+.font {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+.centreVerticallyAndHorizontally {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* centre on horizontal only */
+.loginButton {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 60%);
+    /* background-color: #000000; */
+    border: none;
+    padding: 12px;
+    border-radius: 4px;
+    color: #000000;
+    width: 100px;
+    border: solid 1px #000000;
+    transition: 0.2s ease-in-out;
+
+}
+
+.loginButton:hover {
+    background-color: #000000;
+    /* border: none; */
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.headingStyle {
+    position: absolute;
+    left: 50%;
+    bottom: 100%;
+    transform: translate(-50%);
+    border-radius: 12px;
+    padding: 12px;
+    border: solid 1px #000000;
+    width: 200px;
+    text-align: center;
+}
+
+.formInputs {
+    margin-bottom: 6px;
+    width: 200px;
+    height: 40px;
+    border: solid 1px #000000;
+    border-radius: 3px;
+    transition: 0.2s ease-in-out;
+
+}
+
+.formInputs:focus {
+    border: solid 1px #3bcd3b;
+    outline: none;
+}
