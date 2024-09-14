@@ -1,23 +1,10 @@
 const express = require("express");
 const authenticateUser = require("../db");
 const authenticateUserRouter = express.Router();
-const cors = require("cors");
-const app = express();
 
-// define cors option
-// const corsOption = {
-//   origin: "*",
-//   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-//   preflightContinue: false,
-//   optionsSuccessStatus: 204,
-// };
-
-app.use(cors({ origin: true, credentials: true }));
 // In this request, username and password are sent in the body
 authenticateUserRouter.post("/", async (req, res) => {
   try {
-    // Get sent username and password from body
-    // const { username, password } = req.body;
     const username = req.body.username;
     const password = req.body.password;
     console.log(req.body);
