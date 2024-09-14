@@ -9,23 +9,26 @@ export default function LoginForm({ isUserSignedIn }) {
   const [password, setPassword] = useState("");
 
   async function authenticateUser(event) {
+    // construct the url
     const url = "http://localhost:4023/authenticateUser/";
-
+    // Prevent page reload
     event.preventDefault();
     // console.log(username, password);
     try {
+      // make request
       const response = await fetch(url, {
         method: "POST",
         body: JSON.stringify({ username: username, password: password }),
         headers: { "Content-Type": "application/json" },
       });
-
+      // validate response and decide where user goes from there
       if (response.ok) {
         const json = await response.json();
-        // console.log(json);
-        if (json) {
+        console.log(json);
+        if (json.success) {
           isUserSignedIn(true);
         } else {
+          alert("Invalid username or password");
           isUserSignedIn(false);
         }
       }

@@ -1,9 +1,12 @@
 import LoggedInUserScreen from "./Components/LoggedInUserScreen";
 import LoginForm from "./Components/LoginForm";
 const { useState } = require("react");
+const { useNavigate } = require("react-router-dom");
 
 function App() {
   const [LoggedIn, setLoggedIn] = useState(false);
+  const navigate = useNavigate();
+
   const checkIfUserSignedIn = (userLoggedIn) => {
     setLoggedIn(userLoggedIn);
 
@@ -12,7 +15,7 @@ function App() {
   return (
     <div>
       {LoggedIn ? (
-        <LoggedInUserScreen />
+        navigate("/loggedIn")
       ) : (
         <LoginForm isUserSignedIn={checkIfUserSignedIn} />
       )}
