@@ -1,5 +1,5 @@
 const express = require("express");
-const authenticateUser = require("../db");
+const { authenticateUser } = require("../db");
 const authenticateUserRouter = express.Router();
 
 // In this request, username and password are sent in the body

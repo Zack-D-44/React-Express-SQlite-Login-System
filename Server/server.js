@@ -1,8 +1,8 @@
 // import express
 const express = require("express");
-// import authenticateUserRouter from db
+// import necessary router
 const authenticateUserRouter = require("./Routes/authenticateUser");
-
+const adminRouter = require("./Routes/adminRoutes");
 // create express app
 const app = express();
 
@@ -22,7 +22,7 @@ app.use(
 );
 
 app.use("/authenticateUser", authenticateUserRouter);
-
+app.use("/admin", adminRouter);
 // Start server listening
 
 app.listen(4023, () => console.log("Server started on port 4023"));

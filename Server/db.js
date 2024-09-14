@@ -12,6 +12,7 @@ const authenticateUser = async (username, password) => {
   try {
     const db = await dbPromise;
     const row = await db.get(
+      // different syntax for placeholders
       "SELECT * FROM users WHERE username = ? AND password = ?",
       [username, password]
     );
@@ -29,4 +30,30 @@ const authenticateUser = async (username, password) => {
   }
 };
 
-module.exports = authenticateUser;
+const createUser = async (username, password) => {
+  try {
+    const db = await dbPromise;
+    // insert new user into the table
+    await db.run(
+      "INSERT INTO users (username, password) VALUES ($username, $password)",
+      {
+        $username: username,
+        $password: password,
+      },
+      (err) => {
+        if (err) {
+          // log potential error
+          console.log(err);
+          throw err;
+        }
+      }
+    );
+    // return true that user was added to db
+    return true;
+  } catch (err) {
+    // log errors that arise
+    console.log(err);
+  }
+};
+
+module.exports = { createUser, authenticateUser };
