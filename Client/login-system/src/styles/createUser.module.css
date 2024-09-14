@@ -1,0 +1,19 @@
+.createUserForm {
+    border: 1px solid black;
+    padding: 6px;
+    border-radius: 4px;
+    width: 400px;
+}
+
+.createUserHeading {
+
+    width: 100%;
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+    text-decoration: underline;
+    text-decoration-thickness: 3px;
+
+    /* top: 150px; */
+
+}

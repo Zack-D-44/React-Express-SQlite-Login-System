@@ -16,10 +16,12 @@ export default function Header() {
     <div>
       <header className={styles.header}>
         <h1>Login System</h1>
-        <h1 className={styles.greetingHeading}>Hello {username}</h1>
-        <button className={globalStyles.button} onClick={() => navigate("/")}>
-          &#8592; Back
-        </button>
+        <div className={styles.rightSection}>
+          <p className={styles.greetingHeading}>Hello {username}</p>
+          <button className={globalStyles.button} onClick={() => navigate("/")}>
+            &#8592; Back
+          </button>
+        </div>
       </header>
     </div>
   );
