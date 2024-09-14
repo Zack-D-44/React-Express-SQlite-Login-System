@@ -2,7 +2,7 @@ import React from "react";
 import styles from "../styles/loginForm.module.css";
 import { useState } from "react";
 
-export default function LoginForm() {
+export default function LoginForm({ isUserSignedIn }) {
   // let userValid = false;
   // states for password and user name
   const [username, setUsername] = useState("");
@@ -22,7 +22,12 @@ export default function LoginForm() {
 
       if (response.ok) {
         const json = await response.json();
-        console.log(json);
+        // console.log(json);
+        if (json) {
+          isUserSignedIn(true);
+        } else {
+          isUserSignedIn(false);
+        }
       }
     } catch (error) {
       console.log(error);
