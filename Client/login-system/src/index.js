@@ -5,7 +5,8 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LoggedInUserScreen from "./Components/LoggedInUserScreen";
-import LoginForm from "./Components/LoginForm";
+// import LoginForm from "./Components/LoginForm";
+import NormalUserLoggedInScreen from "./Components/NormalUserLoggedInScreen";
 
 const router = createBrowserRouter([
   {
@@ -13,8 +14,12 @@ const router = createBrowserRouter([
     element: <App />,
   },
   {
-    path: "/loggedIn",
+    path: "admin/logged-in",
     element: <LoggedInUserScreen />,
+  },
+  {
+    path: "user/logged-in",
+    element: <NormalUserLoggedInScreen />,
   },
 ]);
 

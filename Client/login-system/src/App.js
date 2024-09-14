@@ -1,4 +1,4 @@
-import LoggedInUserScreen from "./Components/LoggedInUserScreen";
+// import LoggedInUserScreen from "./Components/LoggedInUserScreen";
 import LoginForm from "./Components/LoginForm";
 const { useState } = require("react");
 const { useNavigate } = require("react-router-dom");
@@ -20,8 +20,25 @@ function App() {
   };
   return (
     <div>
-      {LoggedIn ? (
-        navigate("/loggedIn", { state: { username: currentUserUsername } })
+      {LoggedIn &&
+      currentUserUsername === "admin" &&
+      currentUserUsername === "admin" ? (
+        navigate("/admin/logged-in", {
+          state: { username: currentUserUsername },
+        })
+      ) : (
+        <LoginForm
+          isUserSignedIn={checkIfUserSignedIn}
+          setCurrentUserUsername={getCurrentUserUsername}
+        />
+      )}
+
+      {LoggedIn &&
+      currentUserUsername !== "admin" &&
+      currentUserUsername !== "admin" ? (
+        navigate("/user/logged-in", {
+          state: { username: currentUserUsername },
+        })
       ) : (
         <LoginForm
           isUserSignedIn={checkIfUserSignedIn}
