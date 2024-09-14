@@ -5,6 +5,8 @@ const { useNavigate } = require("react-router-dom");
 
 function App() {
   const [LoggedIn, setLoggedIn] = useState(false);
+  const [currentUserUsername, setCurrentUserUsername] = useState("");
+
   const navigate = useNavigate();
 
   const checkIfUserSignedIn = (userLoggedIn) => {
@@ -12,12 +14,19 @@ function App() {
 
     console.log(LoggedIn);
   };
+
+  const getCurrentUserUsername = (username) => {
+    setCurrentUserUsername(username);
+  };
   return (
     <div>
       {LoggedIn ? (
-        navigate("/loggedIn")
+        navigate("/loggedIn", { state: { username: currentUserUsername } })
       ) : (
-        <LoginForm isUserSignedIn={checkIfUserSignedIn} />
+        <LoginForm
+          isUserSignedIn={checkIfUserSignedIn}
+          setCurrentUserUsername={getCurrentUserUsername}
+        />
       )}
     </div>
   );

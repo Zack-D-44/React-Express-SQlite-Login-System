@@ -1,5 +1,10 @@
 import React from "react";
+import Header from "./Header";
 
 export default function LoggedInUserScreen() {
-  return <div>LoggedInUserScreen</div>;
+  return (
+    <div>
+      <Header />
+    </div>
+  );
 }

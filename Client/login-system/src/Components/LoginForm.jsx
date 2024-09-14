@@ -2,7 +2,7 @@ import React from "react";
 import styles from "../styles/loginForm.module.css";
 import { useState } from "react";
 
-export default function LoginForm({ isUserSignedIn }) {
+export default function LoginForm({ isUserSignedIn, setCurrentUserUsername }) {
   // let userValid = false;
   // states for password and user name
   const [username, setUsername] = useState("");
@@ -26,8 +26,11 @@ export default function LoginForm({ isUserSignedIn }) {
         const json = await response.json();
         console.log(json);
         if (json.success) {
+          // if successful set user valid to true and set their username
           isUserSignedIn(true);
+          setCurrentUserUsername(username);
         } else {
+          // if user is not valid make sure to set the state to false
           alert("Invalid username or password");
           isUserSignedIn(false);
         }
