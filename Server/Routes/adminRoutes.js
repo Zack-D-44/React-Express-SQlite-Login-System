@@ -1,9 +1,7 @@
 // import express and create admin Router
 const express = require("express");
 const adminRouter = express.Router();
-
-const { createUser } = require("../db");
-
+const { createUser, getTopTenUsers } = require("../db");
 // Create user route
 adminRouter.post("/createUser", async (req, res) => {
   //   get username and password from request body
@@ -22,6 +20,19 @@ adminRouter.post("/createUser", async (req, res) => {
     }
   } catch (error) {
     throw error;
+  }
+});
+
+// View top ten user route
+adminRouter.get("/viewUsers/viewTopTen", async (req, res) => {
+  try {
+    const topTenUsers = await getTopTenUsers();
+    // return top ten users with success
+    res.status(200).json(topTenUsers);
+  } catch (error) {
+    console.log(error);
+    // send error if something went wrong with the server
+    res.status(500).json({ success: false, message: "Internal Server Error" });
   }
 });
 

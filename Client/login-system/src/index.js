@@ -8,6 +8,7 @@ import LoggedInUserScreen from "./Components/LoggedInUserScreen";
 // import LoginForm from "./Components/LoginForm";
 import NormalUserLoggedInScreen from "./Components/NormalUserLoggedInScreen";
 import CreateUserAdmin from "./Components/CreateUserAdmin";
+import ViewUsers from "./Components/ViewUsers";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
   {
     path: "admin/create-user",
     element: <CreateUserAdmin />,
+  },
+  {
+    path: "admin/view-users",
+    element: <ViewUsers />,
   },
 ]);
 

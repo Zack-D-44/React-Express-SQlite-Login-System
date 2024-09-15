@@ -56,4 +56,27 @@ const createUser = async (username, password) => {
   }
 };
 
-module.exports = { createUser, authenticateUser };
+const getTopTenUsers = async () => {
+  // array that will hold the results and be sent the the client
+  const resultArray = [];
+
+  try {
+    // get top ten users by id and push each user to an array
+    const db = await dbPromise;
+    await db.each(
+      "SELECT * FROM users ORDER BY id ASC LIMIT 10",
+      (err, row) => {
+        if (err) {
+          console.log(err);
+        }
+        resultArray.push(row);
+      }
+    );
+    // return array with results
+    return resultArray;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports = { createUser, authenticateUser, getTopTenUsers };

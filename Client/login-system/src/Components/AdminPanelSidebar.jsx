@@ -10,7 +10,10 @@ export default function AdminPanelSidebar() {
           {" "}
           Create User{" "}
         </MenuItem>
-        <MenuItem> View Users </MenuItem>
+        <MenuItem component={<Link to="/admin/view-users" />}>
+          {" "}
+          View Users{" "}
+        </MenuItem>
       </Menu>
     </Sidebar>
   );
