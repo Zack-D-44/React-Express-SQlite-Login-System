@@ -1,0 +1,65 @@
+/* Styling the table container */
+.userDataTableContainer {
+    position: absolute;
+    top: 45%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 1000px;
+    max-height: 60vh;
+    /* Set a maximum height for the container */
+    overflow-y: auto;
+    /* Enable vertical scrolling */
+    padding: 20px;
+    box-sizing: border-box;
+    /* Ensure padding is included in the total width/height */
+}
+
+
+/* Styling the table */
+.userDataTable {
+    width: 100%;
+    background-color: #f0f0f0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border-collapse: separate;
+    border-spacing: 0 8px;
+    border-radius: 8px;
+    overflow: hidden;
+    table-layout: fixed;
+}
+
+/* Styling the table headers */
+.userDataTable th {
+    background-color: #000000;
+    color: white;
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+}
+
+.userDataTable td {
+    padding: 15px;
+    background-color: white;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.tableRow {
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.tableRow:hover {
+    background-color: black;
+    /* Change row background on hover */
+}
+
+/* Puts spaces between rows and nmot the botom row */
+.tableRow+.tableRow {
+    margin-top: 8px;
+}
+
+
+.userDataTableContainer {
+    margin-bottom: 20px;
+}
