@@ -1,12 +1,15 @@
 import React from "react";
 import styles from "../styles/loginForm.module.css";
 import { useState } from "react";
+const { useNavigate } = require("react-router-dom");
 
 export default function LoginForm({ isUserSignedIn, setCurrentUserUsername }) {
   // let userValid = false;
   // states for password and user name
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
 
   async function authenticateUser(event) {
     // construct the url
@@ -27,12 +30,16 @@ export default function LoginForm({ isUserSignedIn, setCurrentUserUsername }) {
         console.log(json);
         if (json.success) {
           // if successful set user valid to true and set their username
-          isUserSignedIn(true);
-          setCurrentUserUsername(username);
+          // isUserSignedIn(true);
+          // setCurrentUserUsername(username);
+          if (username === "admin" && password === "admin") {
+            sessionStorage.setItem("username", username);
+            navigate("/admin/logged-in");
+          } else navigate("/user/logged-in");
         } else {
           // if user is not valid make sure to set the state to false
           alert("Invalid username or password");
-          isUserSignedIn(false);
+          // isUserSignedIn(false);
         }
       }
     } catch (error) {

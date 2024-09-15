@@ -7,6 +7,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LoggedInUserScreen from "./Components/LoggedInUserScreen";
 // import LoginForm from "./Components/LoginForm";
 import NormalUserLoggedInScreen from "./Components/NormalUserLoggedInScreen";
+import CreateUserAdmin from "./Components/CreateUserAdmin";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
   {
     path: "user/logged-in",
     element: <NormalUserLoggedInScreen />,
+  },
+  {
+    path: "admin/create-user",
+    element: <CreateUserAdmin />,
   },
 ]);
 

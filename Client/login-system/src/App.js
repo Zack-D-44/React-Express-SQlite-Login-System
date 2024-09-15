@@ -1,26 +1,24 @@
 // import LoggedInUserScreen from "./Components/LoggedInUserScreen";
 import LoginForm from "./Components/LoginForm";
-const { useState } = require("react");
-const { useNavigate } = require("react-router-dom");
 
 function App() {
-  const [LoggedIn, setLoggedIn] = useState(false);
-  const [currentUserUsername, setCurrentUserUsername] = useState("");
+  // const [LoggedIn, setLoggedIn] = useState(false);
+  // const [currentUserUsername, setCurrentUserUsername] = useState("");
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const checkIfUserSignedIn = (userLoggedIn) => {
-    setLoggedIn(userLoggedIn);
+  // const checkIfUserSignedIn = (userLoggedIn) => {
+  //   setLoggedIn(userLoggedIn);
 
-    console.log(LoggedIn);
-  };
+  //   console.log(LoggedIn);
+  // };
 
-  const getCurrentUserUsername = (username) => {
-    setCurrentUserUsername(username);
-  };
+  // const getCurrentUserUsername = (username) => {
+  //   setCurrentUserUsername(username);
+  // };
   return (
     <div>
-      {LoggedIn &&
+      {/* {LoggedIn &&
       currentUserUsername === "admin" &&
       currentUserUsername === "admin" ? (
         navigate("/admin/logged-in", {
@@ -31,9 +29,9 @@ function App() {
           isUserSignedIn={checkIfUserSignedIn}
           setCurrentUserUsername={getCurrentUserUsername}
         />
-      )}
+      )} */}
 
-      {LoggedIn &&
+      {/* {LoggedIn &&
       currentUserUsername !== "admin" &&
       currentUserUsername !== "admin" ? (
         navigate("/user/logged-in", {
@@ -44,7 +42,8 @@ function App() {
           isUserSignedIn={checkIfUserSignedIn}
           setCurrentUserUsername={getCurrentUserUsername}
         />
-      )}
+      )} */}
+      <LoginForm />
     </div>
   );
 }
