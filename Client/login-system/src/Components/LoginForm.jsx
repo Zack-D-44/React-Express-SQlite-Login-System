@@ -26,6 +26,7 @@ export default function LoginForm({ isUserSignedIn, setCurrentUserUsername }) {
       });
       // validate response and decide where user goes from there
       if (response.ok) {
+        //Going to need to change this
         const json = await response.json();
         console.log(json);
         if (json.success) {
