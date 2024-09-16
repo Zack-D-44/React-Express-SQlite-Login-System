@@ -6,6 +6,25 @@ const { useTable } = require("react-table");
 
 export default function ViewUsers() {
   const [userData, setUserData] = useState([]);
+  const [userToSearchFor, setUserToSearchFor] = useState("");
+  const [filterByOption, setFilterByOption] = useState("");
+
+  const handleFilterByOptionChange = (event) => {
+    // Set state to the selected option
+    setFilterByOption(event.target.value);
+
+    // switch case to handle which option was selected
+    switch (filterByOption) {
+      case "username":
+        break;
+      case "password":
+        break;
+      case "id":
+        break;
+      default:
+        break;
+    }
+  };
 
   // Fetch the top ten users data
   const fetchTopTenUserData = useCallback(async () => {
@@ -58,6 +77,26 @@ export default function ViewUsers() {
     <div>
       <Header />
       <AdminPanelSidebar />
+
+      <div className={style.filterOptionsContainer}>
+        <label htmlFor="filter-options">Filter By: </label>
+        <select
+          name="filter-options"
+          id="filter-options"
+          className={style.handleFilterByOptionChange}
+        >
+          <option value="Filter By ID">Id</option>
+          <option value="Filter By Username">Username</option>
+          <option value="Filter By Password">Password</option>
+        </select>
+
+        <input
+          type="text"
+          placeholder="Search For User"
+          value={userToSearchFor}
+          onChange={(e) => setUserToSearchFor(e.target.value)}
+        />
+      </div>
 
       {/* Table container */}
       <div className={style.userDataTableContainer}>

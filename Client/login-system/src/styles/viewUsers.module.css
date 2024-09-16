@@ -63,3 +63,13 @@
 .userDataTableContainer {
     margin-bottom: 20px;
 }
+
+.filterOptionsContainer {
+    position: absolute;
+    top: 10%;
+    left: 75%;
+}
+
+.filterByDropdownMenu {
+    margin-right: 8px;
+}
