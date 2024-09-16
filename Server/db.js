@@ -8,7 +8,7 @@ const dbPromise = open({
   driver: sqlite3Promise.Database,
 });
 
-const authenticateUser = async (username, password) => {
+const authenticateUserIsInDatabase = async (username, password) => {
   try {
     const db = await dbPromise;
     const row = await db.get(
@@ -19,11 +19,18 @@ const authenticateUser = async (username, password) => {
 
     if (row) {
       // User exists
-      return true;
+      return row;
     } else {
       // User does not exist
       return false;
     }
+    // if (row) {
+    //   // User exists
+    //   return true;
+    // } else {
+    //   // User does not exist
+    //   return false;
+    // }
   } catch (err) {
     console.error(err);
     throw err; // Rethrow the error so it can be caught by the caller
@@ -114,7 +121,7 @@ const getUsersByUsername = async (username) => {
 
 module.exports = {
   createUser,
-  authenticateUser,
+  authenticateUserIsInDatabase,
   getTopTenUsers,
   getUsersAscendingId,
   getUsersDescendingId,

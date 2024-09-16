@@ -13,7 +13,7 @@ export default function LoginForm({ isUserSignedIn, setCurrentUserUsername }) {
 
   async function authenticateUser(event) {
     // construct the url
-    const url = "http://localhost:4023/authenticateUser/";
+    const url = "http://localhost:4023/authenticateUser/login";
     // Prevent page reload
     event.preventDefault();
     // console.log(username, password);

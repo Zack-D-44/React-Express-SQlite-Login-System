@@ -1,19 +1,25 @@
 const express = require("express");
-const { authenticateUser } = require("../db");
+const { authenticateUserIsInDatabase } = require("../db");
+const { generateJWTToken } = require("../auth");
 const authenticateUserRouter = express.Router();
 
 // In this request, username and password are sent in the body
-authenticateUserRouter.post("/", async (req, res) => {
+authenticateUserRouter.post("/login", async (req, res) => {
   try {
     const { username, password } = req.body;
 
     // Ensure that authenticateUser is not redefined
-    const isAuthenticated = await authenticateUser(username, password); // Assume authenticateUser is async
+    const isAuthenticatedInDatabase = await authenticateUserIsInDatabase(
+      username,
+      password
+    ); // Assume authenticateUser is async
+    // console.log(isAuthenticated);
+    if (isAuthenticatedInDatabase) {
+      const token = generateJWTToken(isAuthenticatedInDatabase);
 
-    if (isAuthenticated) {
-      res.status(200).json({ success: true });
+      res.status(200).json({ token });
     } else {
-      res.status(401).json({ success: false });
+      res.status(401).json({ success: false, message: "Invalid credentials" });
     }
   } catch (error) {
     console.log(error);
