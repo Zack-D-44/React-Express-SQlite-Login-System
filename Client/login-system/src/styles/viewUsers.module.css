@@ -67,7 +67,8 @@
 .filterOptionsContainer {
     position: absolute;
     top: 10%;
-    left: 75%;
+    left: 70%;
+    display: flex;
 }
 
 .filterByDropdownMenu {

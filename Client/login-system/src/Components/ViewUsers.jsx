@@ -9,6 +9,30 @@ export default function ViewUsers() {
   const [userToSearchFor, setUserToSearchFor] = useState("");
   const [filterByOption, setFilterByOption] = useState("");
 
+  const fetchSearchedUser = useCallback(
+    async (e) => {
+      e.preventDefault(); // Prevent form from reloading the page
+      try {
+        if (!userToSearchFor) {
+          return; // Do nothing if the search input is empty
+        }
+        const url = `http://localhost:4023/admin/viewUsers/searchUser?username=${userToSearchFor}`;
+
+        const response = await fetch(url);
+        if (response.ok) {
+          const user = await response.json();
+          console.log(user);
+          setUserData(user); // Set the searched user to the table data
+        } else {
+          throw new Error(response.statusText);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    [userToSearchFor]
+  );
+
   // Fetch filtered data based on filter option
   const fetchFilteredUserData = useCallback(async () => {
     try {
@@ -105,12 +129,15 @@ export default function ViewUsers() {
           <option value="desc">Descending</option>
         </select>
 
-        <input
-          type="text"
-          placeholder="Search For User"
-          value={userToSearchFor}
-          onChange={(e) => setUserToSearchFor(e.target.value)}
-        />
+        <form action="#" onSubmit={fetchSearchedUser}>
+          <input
+            type="text"
+            placeholder="Search For User"
+            value={userToSearchFor} // Use userToSearchFor here
+            onChange={(e) => setUserToSearchFor(e.target.value)}
+          />
+          <input type="submit" value="Search" />
+        </form>
       </div>
 
       {/* Table container */}

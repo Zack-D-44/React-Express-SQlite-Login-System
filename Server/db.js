@@ -99,10 +99,24 @@ const getUsersDescendingId = async () => {
   }
 };
 
+const getUsersByUsername = async (username) => {
+  try {
+    const db = await dbPromise;
+    const result = await db.all(
+      "SELECT * FROM users WHERE username = $username",
+      { $username: username }
+    );
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 module.exports = {
   createUser,
   authenticateUser,
   getTopTenUsers,
   getUsersAscendingId,
   getUsersDescendingId,
+  getUsersByUsername,
 };

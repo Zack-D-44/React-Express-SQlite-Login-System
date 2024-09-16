@@ -6,6 +6,7 @@ const {
   getTopTenUsers,
   getUsersAscendingId,
   getUsersDescendingId,
+  getUsersByUsername,
 } = require("../db");
 // Create user route
 adminRouter.post("/createUser", async (req, res) => {
@@ -55,6 +56,18 @@ adminRouter.get("/viewUsers/id-descending", async (req, res) => {
   try {
     const usersByDescendingID = await getUsersDescendingId();
     res.status(200).json(usersByDescendingID);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: "Internal Server Error" });
+  }
+});
+
+adminRouter.get("/viewUsers/searchUser", async (req, res) => {
+  try {
+    const { username } = req.query;
+    const userByUsername = await getUsersByUsername(username);
+
+    res.status(200).json(userByUsername);
   } catch (error) {
     console.log(error);
     res.status(500).json({ success: false, message: "Internal Server Error" });
