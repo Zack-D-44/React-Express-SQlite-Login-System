@@ -9,46 +9,60 @@ export default function ViewUsers() {
   const [userToSearchFor, setUserToSearchFor] = useState("");
   const [filterByOption, setFilterByOption] = useState("");
 
-  const handleFilterByOptionChange = (event) => {
-    // Set state to the selected option
-    setFilterByOption(event.target.value);
+  // Fetch filtered data based on filter option
+  const fetchFilteredUserData = useCallback(async () => {
+    try {
+      let url = "";
+      if (filterByOption === "asc") {
+        url = "http://localhost:4023/admin/viewUsers/id-ascending";
+      } else if (filterByOption === "desc") {
+        url = "http://localhost:4023/admin/viewUsers/id-descending";
+      }
 
-    // switch case to handle which option was selected
-    switch (filterByOption) {
-      case "username":
-        break;
-      case "password":
-        break;
-      case "id":
-        break;
-      default:
-        break;
+      if (url) {
+        const response = await fetch(url);
+        if (response.ok) {
+          const json = await response.json();
+          setUserData(json);
+        } else {
+          throw new Error(response.statusText);
+        }
+      }
+    } catch (error) {
+      console.error("Error fetching filtered data:", error);
     }
-  };
+  }, [filterByOption]);
 
-  // Fetch the top ten users data
+  // Fetch top 10 users on initial load (only once)
   const fetchTopTenUserData = useCallback(async () => {
     try {
       const url = "http://localhost:4023/admin/viewUsers/viewTopTen";
-
       const response = await fetch(url);
 
       if (response.ok) {
         const json = await response.json();
         setUserData(json);
       } else {
-        throw Error(response.statusText);
+        throw new Error(response.statusText);
       }
     } catch (error) {
-      console.log(error);
+      console.error("Error fetching top 10 users:", error);
     }
   }, []);
 
-  // Fetch the top ten users data on mount
+  // Fetch top 10 users on mount only
   useEffect(() => {
     fetchTopTenUserData();
   }, [fetchTopTenUserData]);
 
+  // Fetch filtered data when the filter option changes
+  useEffect(() => {
+    if (filterByOption) {
+      fetchFilteredUserData();
+    }
+  }, [filterByOption, fetchFilteredUserData]);
+
+  // Define table data and columns
   const data = useMemo(() => userData || [], [userData]);
 
   const columns = useMemo(
@@ -79,15 +93,16 @@ export default function ViewUsers() {
       <AdminPanelSidebar />
 
       <div className={style.filterOptionsContainer}>
-        <label htmlFor="filter-options">Filter By: </label>
+        <label htmlFor="filter-options">Filter By ID: </label>
         <select
           name="filter-options"
           id="filter-options"
-          className={style.handleFilterByOptionChange}
+          className={style.filterByDropdownMenu}
+          onChange={(e) => setFilterByOption(e.target.value)}
         >
-          <option value="Filter By ID">Id</option>
-          <option value="Filter By Username">Username</option>
-          <option value="Filter By Password">Password</option>
+          <option value="">Select Filter</option>
+          <option value="asc">Ascending</option>
+          <option value="desc">Descending</option>
         </select>
 
         <input

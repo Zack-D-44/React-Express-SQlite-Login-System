@@ -1,7 +1,12 @@
 // import express and create admin Router
 const express = require("express");
 const adminRouter = express.Router();
-const { createUser, getTopTenUsers } = require("../db");
+const {
+  createUser,
+  getTopTenUsers,
+  getUsersAscendingId,
+  getUsersDescendingId,
+} = require("../db");
 // Create user route
 adminRouter.post("/createUser", async (req, res) => {
   //   get username and password from request body
@@ -32,6 +37,26 @@ adminRouter.get("/viewUsers/viewTopTen", async (req, res) => {
   } catch (error) {
     console.log(error);
     // send error if something went wrong with the server
+    res.status(500).json({ success: false, message: "Internal Server Error" });
+  }
+});
+
+adminRouter.get("/viewUsers/id-ascending", async (req, res) => {
+  try {
+    const usersByAscendingID = await getUsersAscendingId();
+    res.status(200).json(usersByAscendingID);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: "Internal Server Error" });
+  }
+});
+
+adminRouter.get("/viewUsers/id-descending", async (req, res) => {
+  try {
+    const usersByDescendingID = await getUsersDescendingId();
+    res.status(200).json(usersByDescendingID);
+  } catch (error) {
+    console.log(error);
     res.status(500).json({ success: false, message: "Internal Server Error" });
   }
 });

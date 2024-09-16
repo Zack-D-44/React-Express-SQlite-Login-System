@@ -79,4 +79,30 @@ const getTopTenUsers = async () => {
   }
 };
 
-module.exports = { createUser, authenticateUser, getTopTenUsers };
+const getUsersAscendingId = async () => {
+  try {
+    const db = await dbPromise;
+    const result = await db.all("SELECT * FROM users ORDER BY id ASC");
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const getUsersDescendingId = async () => {
+  try {
+    const db = await dbPromise;
+    const result = await db.all("SELECT * FROM users ORDER BY id DESC");
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports = {
+  createUser,
+  authenticateUser,
+  getTopTenUsers,
+  getUsersAscendingId,
+  getUsersDescendingId,
+};
