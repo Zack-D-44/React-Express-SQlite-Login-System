@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "./Header";
-import verifyAdmin from "../auth/auth";
+import { verifyAdmin } from "../auth/auth";
 
 // import style from "../styles/createUser.module.css";
 // import globalStyles from "../styles/globalStyles.module.css";

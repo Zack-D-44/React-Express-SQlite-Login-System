@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "./Header";
 import style from "../styles/createUser.module.css";
 import globalStyles from "../styles/globalStyles.module.css";
 import AdminPanelSidebar from "./AdminPanelSidebar";
-import verifyAdmin from "../auth";
+import { verifyAdmin } from "../auth/auth";
 const { useState } = require("react");
 const { useNavigate } = require("react-router-dom");
 export default function CreateUserAdmin() {
@@ -12,6 +12,13 @@ export default function CreateUserAdmin() {
   const [newUsersPasword, setNewUsersPassword] = useState("");
   // Client side validation for the username and password
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const isAdmin = verifyAdmin();
+    if (!isAdmin) {
+      navigate("/login");
+    }
+  }, []);
 
   const validateNewUserDetails = () => {
     let message = "";

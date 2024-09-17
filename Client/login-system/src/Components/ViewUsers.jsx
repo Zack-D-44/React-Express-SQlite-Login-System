@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback, useMemo } from "react";
 import style from "../styles/viewUsers.module.css";
 import Header from "./Header";
 import AdminPanelSidebar from "./AdminPanelSidebar";
-import { verifyAdmin } from "../auth";
+import { verifyAdmin } from "../auth/auth";
 const { useTable } = require("react-table");
 const { useNavigate } = require("react-router-dom");
 export default function ViewUsers() {
