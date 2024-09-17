@@ -12,7 +12,7 @@ import ViewUsers from "./Components/ViewUsers";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/login",
     element: <App />,
   },
   {

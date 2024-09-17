@@ -8,16 +8,17 @@ authenticateUserRouter.post("/login", async (req, res) => {
   try {
     const { username, password } = req.body;
 
-    // Ensure that authenticateUser is not redefined
+    // check if user is in database
     const isAuthenticatedInDatabase = await authenticateUserIsInDatabase(
       username,
       password
     ); // Assume authenticateUser is async
     // console.log(isAuthenticated);
+    // if user is in datbase create token and send it in response else send error
     if (isAuthenticatedInDatabase) {
       const token = generateJWTToken(isAuthenticatedInDatabase);
 
-      res.status(200).json({ token });
+      res.status(200).json({ success: true, token });
     } else {
       res.status(401).json({ success: false, message: "Invalid credentials" });
     }

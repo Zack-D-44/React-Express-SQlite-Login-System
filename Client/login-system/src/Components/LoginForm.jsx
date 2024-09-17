@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "../styles/loginForm.module.css";
 import { useState } from "react";
+import { jwtDecode } from "jwt-decode";
 const { useNavigate } = require("react-router-dom");
 
 export default function LoginForm({ isUserSignedIn, setCurrentUserUsername }) {
@@ -28,12 +29,18 @@ export default function LoginForm({ isUserSignedIn, setCurrentUserUsername }) {
       if (response.ok) {
         //Going to need to change this
         const json = await response.json();
-        console.log(json);
+
         if (json.success) {
           // if successful set user valid to true and set their username
-          // isUserSignedIn(true);
-          // setCurrentUserUsername(username);
-          if (username === "admin" && password === "admin") {
+          // set user auth token in local storage
+          localStorage.setItem("authToken", json.token);
+
+          // retrive token from local storage and decode it
+          const authToken = localStorage.getItem("authToken");
+          const decodedAuthToken = jwtDecode(authToken);
+
+          // check if the role of the user is admin or user and redirect them to their respective pages
+          if (decodedAuthToken.role === "admin") {
             sessionStorage.setItem("username", username);
             navigate("/admin/logged-in");
           } else navigate("/user/logged-in");
