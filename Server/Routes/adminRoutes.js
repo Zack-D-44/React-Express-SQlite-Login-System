@@ -8,8 +8,10 @@ const {
   getUsersDescendingId,
   getUsersByUsername,
 } = require("../db");
+
+const { verifyAdmin } = require("../auth");
 // Create user route
-adminRouter.post("/createUser", async (req, res) => {
+adminRouter.post("/createUser", verifyAdmin, async (req, res) => {
   //   get username and password from request body
   const { username, password } = req.body;
 
@@ -30,7 +32,7 @@ adminRouter.post("/createUser", async (req, res) => {
 });
 
 // View top ten user route
-adminRouter.get("/viewUsers/viewTopTen", async (req, res) => {
+adminRouter.get("/viewUsers/viewTopTen", verifyAdmin, async (req, res) => {
   try {
     const topTenUsers = await getTopTenUsers();
     // return top ten users with success
@@ -42,7 +44,7 @@ adminRouter.get("/viewUsers/viewTopTen", async (req, res) => {
   }
 });
 
-adminRouter.get("/viewUsers/id-ascending", async (req, res) => {
+adminRouter.get("/viewUsers/id-ascending", verifyAdmin, async (req, res) => {
   try {
     // fetch users from databse ordered by ascending id
     const usersByAscendingID = await getUsersAscendingId();
@@ -54,7 +56,7 @@ adminRouter.get("/viewUsers/id-ascending", async (req, res) => {
   }
 });
 
-adminRouter.get("/viewUsers/id-descending", async (req, res) => {
+adminRouter.get("/viewUsers/id-descending", verifyAdmin, async (req, res) => {
   try {
     // fetch users from databse ordered by descending id
     const usersByDescendingID = await getUsersDescendingId();
@@ -66,7 +68,7 @@ adminRouter.get("/viewUsers/id-descending", async (req, res) => {
   }
 });
 
-adminRouter.get("/viewUsers/searchUser", async (req, res) => {
+adminRouter.get("/viewUsers/searchUser", verifyAdmin, async (req, res) => {
   try {
     // get username from query
     const { username } = req.query;

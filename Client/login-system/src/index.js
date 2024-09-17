@@ -9,6 +9,7 @@ import LoggedInUserScreen from "./Components/LoggedInUserScreen";
 import NormalUserLoggedInScreen from "./Components/NormalUserLoggedInScreen";
 import CreateUserAdmin from "./Components/CreateUserAdmin";
 import ViewUsers from "./Components/ViewUsers";
+import UnauthorisedPage from "./Components/UnauthorisedPage";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
   {
     path: "admin/view-users",
     element: <ViewUsers />,
+  },
+  {
+    path: "/unauthorised",
+    element: <UnauthorisedPage />,
   },
 ]);
 

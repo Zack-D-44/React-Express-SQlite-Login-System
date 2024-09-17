@@ -3,13 +3,15 @@ import Header from "./Header";
 import style from "../styles/createUser.module.css";
 import globalStyles from "../styles/globalStyles.module.css";
 import AdminPanelSidebar from "./AdminPanelSidebar";
+import verifyAdmin from "../auth";
 const { useState } = require("react");
-
+const { useNavigate } = require("react-router-dom");
 export default function CreateUserAdmin() {
   // create states for the username and password
   const [newUsersUsername, setNewUsersUsername] = useState("");
   const [newUsersPasword, setNewUsersPassword] = useState("");
   // Client side validation for the username and password
+  const navigate = useNavigate();
 
   const validateNewUserDetails = () => {
     let message = "";
@@ -46,11 +48,13 @@ export default function CreateUserAdmin() {
     } else {
       // create user with create user function
       const url = "http://localhost:4023/admin/createUser";
+      const token = localStorage.getItem("authToken");
 
       const response = await fetch(url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           username: newUsersUsername,
@@ -58,8 +62,11 @@ export default function CreateUserAdmin() {
         }),
       });
 
+      if (response.status === 401) {
+        navigate("/login");
+      }
+
       const userCreated = await response.json();
-      console.log(userCreated);
 
       if (userCreated.userCreated) {
         alert(`User ${newUsersUsername} created successfully`);

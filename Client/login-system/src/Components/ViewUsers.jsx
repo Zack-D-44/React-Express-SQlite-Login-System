@@ -2,12 +2,22 @@ import React, { useEffect, useState, useCallback, useMemo } from "react";
 import style from "../styles/viewUsers.module.css";
 import Header from "./Header";
 import AdminPanelSidebar from "./AdminPanelSidebar";
+import { verifyAdmin } from "../auth";
 const { useTable } = require("react-table");
-
+const { useNavigate } = require("react-router-dom");
 export default function ViewUsers() {
   const [userData, setUserData] = useState([]);
   const [userToSearchFor, setUserToSearchFor] = useState("");
   const [filterByOption, setFilterByOption] = useState("");
+  const navigate = useNavigate();
+
+  // verify user is admin
+  useEffect(() => {
+    const isAdmin = verifyAdmin();
+    if (!isAdmin) {
+      navigate("/login");
+    }
+  });
 
   const fetchSearchedUser = useCallback(
     async (e) => {
@@ -18,7 +28,18 @@ export default function ViewUsers() {
         }
         const url = `http://localhost:4023/admin/viewUsers/searchUser?username=${userToSearchFor}`;
 
-        const response = await fetch(url);
+        const response = await fetch(url, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${localStorage.getItem("authToken")}`,
+          },
+        });
+
+        if (response === 401) {
+          navigate("/login");
+        }
+
         if (response.ok) {
           const user = await response.json();
           console.log(user);
@@ -44,7 +65,18 @@ export default function ViewUsers() {
       }
 
       if (url) {
-        const response = await fetch(url);
+        const response = await fetch(url, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${localStorage.getItem("authToken")}`,
+          },
+        });
+
+        if (response.status === 401) {
+          navigate("/login");
+        }
+
         if (response.ok) {
           const json = await response.json();
           setUserData(json);
@@ -61,7 +93,17 @@ export default function ViewUsers() {
   const fetchTopTenUserData = useCallback(async () => {
     try {
       const url = "http://localhost:4023/admin/viewUsers/viewTopTen";
-      const response = await fetch(url);
+      const response = await fetch(url, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `Bearer ${localStorage.getItem("authToken")}`,
+        },
+      });
+
+      if (response.status === 401) {
+        navigate("/login");
+      }
 
       if (response.ok) {
         const json = await response.json();
