@@ -8,12 +8,14 @@ const generateJWTToken = (user) => {
   //   throw new Error("The SECRET_JWT_KEY environment variable is not set.");
   // }
 
+  // construct the tokens payload
   const tokenPayload = {
     id: user.id,
     username: user.username,
     role: user.role,
   };
 
+  // Return created token to the user
   return jwt.sign(tokenPayload, process.env.SECRET_KEY, {
     expiresIn: "1h",
   });
