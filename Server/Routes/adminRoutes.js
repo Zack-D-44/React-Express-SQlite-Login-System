@@ -44,32 +44,39 @@ adminRouter.get("/viewUsers/viewTopTen", async (req, res) => {
 
 adminRouter.get("/viewUsers/id-ascending", async (req, res) => {
   try {
+    // fetch users from databse ordered by ascending id
     const usersByAscendingID = await getUsersAscendingId();
     res.status(200).json(usersByAscendingID);
   } catch (error) {
     console.log(error);
+    // send error response if something went wrong
     res.status(500).json({ success: false, message: "Internal Server Error" });
   }
 });
 
 adminRouter.get("/viewUsers/id-descending", async (req, res) => {
   try {
+    // fetch users from databse ordered by descending id
     const usersByDescendingID = await getUsersDescendingId();
     res.status(200).json(usersByDescendingID);
   } catch (error) {
     console.log(error);
+    // send error response if something went wrong
     res.status(500).json({ success: false, message: "Internal Server Error" });
   }
 });
 
 adminRouter.get("/viewUsers/searchUser", async (req, res) => {
   try {
+    // get username from query
     const { username } = req.query;
+    // fetch user data based on username provided
     const userByUsername = await getUsersByUsername(username);
-
+    // respond with the user data
     res.status(200).json(userByUsername);
   } catch (error) {
     console.log(error);
+    // respond with error if something went wrong
     res.status(500).json({ success: false, message: "Internal Server Error" });
   }
 });
