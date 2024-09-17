@@ -11,8 +11,14 @@ export default function Header() {
       <h1>Login System</h1>
       <div className={styles.rightSection}>
         <p className={styles.greetingHeading}>Hello {username}</p>
-        <button className={globalStyles.button} onClick={() => navigate("/")}>
-          &#8592; Back
+        <button
+          className={globalStyles.button}
+          onClick={() => {
+            localStorage.removeItem("authToken");
+            navigate("/login");
+          }}
+        >
+          Logout
         </button>
       </div>
     </header>
