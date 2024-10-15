@@ -17,6 +17,7 @@ This is a secure full stack web app that allows users to log in, with JWT based 
 - Navigate to the backend directory: `cd Server`
 - Start the backend server using the following command: `node server.js`
 - Navigate to the client directory using: `cd ../Client/login-system`
+- Install the client dependencies by running `npm i`
 - Start the frontend development server: `npm start`
 
 The app will be running on `http://localhost:3000/`.
