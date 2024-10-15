@@ -10,8 +10,14 @@ import NormalUserLoggedInScreen from "./Components/NormalUserLoggedInScreen";
 import CreateUserAdmin from "./Components/CreateUserAdmin";
 import ViewUsers from "./Components/ViewUsers";
 import UnauthorisedPage from "./Components/UnauthorisedPage";
+import LandingPage from "./Components/LandingPage";
 
 const router = createBrowserRouter([
+  {
+    path: "",
+    element: <LandingPage />,
+  },
+
   {
     path: "/login",
     element: <App />,
