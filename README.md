@@ -12,6 +12,7 @@ This is a secure full stack web app that allows users to log in, with JWT based 
 ## Setup and Installation
 - Clone the repositort using the `git clone` command
 - Navigate into the project directory: `cd repo-name`
+- Create a .env file in the root repository directory and set a variable `SECRET_KEY` to whatever you want
 - Install Dependencies using: `npm install`
 - Navigate to the backend directory: `cd Server`
 - Start the backend server using the following command: `node server.js`
